@@ -2,6 +2,7 @@
 // Created by Idil Saglam on 2/16/22.
 //
 #include <stdio.h>
+#include <stdlib.h>
 
 //TODO! calisiyor anlamaya calis
 void swap(int *p, int *q){
@@ -42,9 +43,41 @@ int nbr_occ (int nbr, int t[], int v){
 }
 
 void nbr_occ_op (int nbr, int t[], int v, int *pnv){
-
+    // *pnv =  Déréférencement
+    *pnv = nbr_occ(nbr,t,v);
 }
 
+void min_max_op(int nbr, int t[], int *pmin, int *pmax){
+    int min = t[0];
+    int max = t[0];
+
+    for(int i =1; i<nbr; i++){
+        if(t[i]<min){
+            min = t[i];
+        }
+        if(t[i] > max){
+            max = t[i];
+        }
+    }
+    *pmin = min;
+    *pmax = max;
+}
+
+
+void print_tab (int t[], int start, int end){
+    int* p = NULL;
+    for(int i = start; i<end; i++){
+        p = t+i;
+        printf("%p : %d", p, *p);
+    }
+    free(p);
+}
+
+void print_tab (int *pstart, int *pend){
+    for(int* i = pstart; i<=pend; i++){
+        printf("%p : %d", i, *i);
+    }
+}
 int main(){
 
     int t[] = {2,3,4,5};
