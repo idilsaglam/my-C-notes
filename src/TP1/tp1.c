@@ -2,8 +2,10 @@
 // Created by Idil Saglam on 2/13/22.
 //
 #include <stdio.h>
+#include <stdlib.h>
 #include <math.h>
 #define N 27
+#define SUP 10
 
 void ex2_1(int n){
     int res = 0;
@@ -21,8 +23,7 @@ void ex2_2(int n){
         somme+= i;
     }
     printf("La somme est %d\n",somme);
-    //TODO
-    printf("Moyenne est %d\n",(double)somme/n);
+    printf("Moyenne est %f\n",(double)somme/n);
 }
 
 int fact(int n){
@@ -61,7 +62,54 @@ int suiteSyracuse(int n, int tmpDeVol){
     return suiteSyracuse(n,tmpDeVol);
 }
 
+int* eratosthene(){
+    // tab va cotenir uniquement des 0 (False) et 1 (True)
+    int *tab = calloc(SUP, sizeof(int));
+    for(int i = 2; i<SUP; i++) {
+        for (int j = 2 * i; j < SUP; j = j+i) {
+                tab[j] = 1;
+        }
+    }
+    return tab;
+}
+
+void eros2(){
+   /* // tab va contenir uniquement des 0 (False) et 1 (True)
+    int *tab = calloc(SUP, sizeof(int));
+    for(int i = 2; i<SUP; i++) {
+        for (int j = 2 * i; j < SUP; j = j+i) {
+            tab[j] = 1;
+        }
+    }
+    */
+   int *tab = eratosthene();
+    for(int i = 2; i<SUP-2; i++){
+        if(!tab[i] && !tab[i+2]){
+            printf("( %d %d ) ",i,i+2);
+        }
+    }
+    printf("\n");
+    free(tab);
+}
+
+void eros3(){
+    int *tab = eratosthene();
+    for(int i = 2; i<SUP; i++){
+        for(int j = 2; j<SUP; j++){
+            if((!tab[i] && !tab[j]) && ((i+j) % 2 == 0)){
+                printf("%d + %d = %d\n",i,j,i+j);
+            }
+        }
+    }
+    printf("\n");
+    free(tab);
+}
+
 int main(){
+    eros3();
+    int g;
+    scanf("%d",&g);
+    ex2_1(g);
     int n = 42;
     int m = 2;
     double  x = 3.14;
