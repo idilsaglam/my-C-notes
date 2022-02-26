@@ -127,29 +127,23 @@ fraction build(long int n, long int d) {
     return fraction1;
 }
 int eq_fraction(fraction f, fraction g){
-    if(f.num*g.den == g.num*f.den){
-        return 0;
-    }
-    return 1;
+    return(f.num*g.den == g.num*f.den);
 }
 
 int is_int(fraction f){
-    if(f.den == 1){
-        return 1;
-    }
-    return 0;
+    return(f.den == 1);
 }
 
 fraction sum(fraction f, fraction g){
     fraction res;
     if(f.den == g.den){
         res.den = f.den;
-        res.num = f.num + g.den;
+        res.num = f.num + g.num;
         return res;
     }
     int c = f.den * g.den;
     res.den = c;
-    res.num = c*(f.num)+ c*(g.num);
+    res.num = c*(f.num+g.num);
     return res;
 }
 
@@ -163,7 +157,7 @@ fraction sub(fraction f, fraction g){
     }
     int c = f.den * g.den;
     res.den = c;
-    res.num = c*(f.num)- c*(g.num);
+    res.num = c*(f.num- g.num);
     return res;
 
 }
@@ -186,12 +180,21 @@ long pgcd(long a, long b){
     }
     return x;
 }
-
-fraction reduce(fraction f){
-    long cal = pgcd(f.den,f.num);
-    f.den /= cal;
-    f.num /= cal;
+//TODO ISARETTTTTTTTTTTT
+fraction* reduce(fraction* f){
+    long cal = pgcd(f->den,f->num);
+    f->den /= cal;
+    f->num /= cal;
     return f;
+}
+//TODO ISARETTTTTTTTTTTT
+fraction sqrt_frac(fraction f){
+    f.num= sqrt(f.num);
+    f.den = sqrt(f.den);
+    return f;
+}
+double calculate(fraction g){
+    return g.num/g.den;
 }
 
 
@@ -206,7 +209,12 @@ int eq_point(point p1, point p2){
 }
 
 double dist(point p1, point p2){
-    return (double) sqrt(abs(p1.x-p2.x * p1.x-p2.x)+ abs((p2.y-p1.y * p2.y-p1.y)));
+   //return (double) sqrt(abs((p1.x-p2.x) * (p1.x-p2.x))+ abs((p2.y-p1.y) * (p2.y-p1.y)));
+    fraction sx = sub(p1.x,p2.x),sy = sub(p1.y,p2.y);
+    fraction mx = mul(sx,sx),my = mul(sy,sy);
+    fraction s = sum(mx,my);
+    return calculate(sqrt_frac(s));
+
 }
 
 void affiche(char c[]){
@@ -214,18 +222,31 @@ void affiche(char c[]){
         printf(c[i]);
     }
 }
-void affichePoly(int tab[]){
-    printf("%d ",tab[0]);
-    char x[] = "X";
-    for(int i = 1; i<sizeof(tab)/sizeof(tab[0]); i++){
-        printf("%d ",tab[i]);
-        affiche(x);
-        x+= "X";
-    }
+void affichePoly(int* tab, int array_length){
+    printf("%d\n", sizeof(tab));
+    for(int i = 0; i< array_length; i++){
+        if(tab[i] == 0){
+            continue;
+        }
+        if(i == 0){
+            printf("%d",tab[i]);
+            continue;
+        }
+        printf("+ %dX^%d ",tab[i],i);
+   }
+    printf("\n");
 }
 
+void additionPoly(int tab1[], int tab2[]){
+    
+}
 int main(){
     com_alea(NBC);
+
+    int t[] = {1,0,3,0};
+
+    affichePoly(t, sizeof(t) / sizeof(int));
+
     return  0;
 }
 

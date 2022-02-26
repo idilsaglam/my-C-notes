@@ -83,6 +83,37 @@ void print_tab2 (int *pstart, int *pend){
     }
     return;
 }
+
+//TODO
+void triABulles(int t[], int start, int end){
+    int c, sorted;
+    int taille = end - start;
+    do {
+        sorted = 1;
+        for(int i = start; i<taille-1; i++){
+            c = i+1;
+            if(t[i] > t[c]){
+                swap(t+i,t+c);
+                sorted = 0;
+            }
+        }
+    } while(sorted == 0);
+}
+
+void triABulles2(int* start, int* end){
+    int *c, sorted;
+    do {
+        sorted = 1;
+        for(int* i = start; i < end; i++){
+            c = i+1;
+            if(*i > *c){
+                swap(i,c);
+                sorted = 0;
+            }
+        }
+    } while(sorted == 0);
+}
+
 int main(){
 
     int t[] = {2,3,4,5};
