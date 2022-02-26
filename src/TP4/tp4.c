@@ -62,7 +62,24 @@ int array_search(array *t, int val){
     return -1;
 }
 
+//TODO
+array* array_init_from(int* mem, unsigned int len, unsigned int cap){
+    array a;
+    a.ptr = mem;
+    a.taille = len;
 
+}
+
+//TODO
+void array_remove(array *t, unsigned int index){
+
+}
+
+
+//TODO
+void array_insert(array *t, unsigned int index, int valeur){
+
+}
 
 int main(){
     return 1;
