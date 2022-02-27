@@ -237,9 +237,48 @@ void affichePoly(int* tab, int array_length){
     printf("\n");
 }
 
-void additionPoly(int tab1[], int tab2[]){
-    
+void additionPoly(int* tab1, int l1, int* tab2, int l2){
+    *res = NULL;
+    int max = max(l1,l2);
+    for(int i = 0; i < max; i++){
+        res[i] = 0;
+        if (i < l1) {
+            res[i] += tab1[i];
+        }
+        if (i < l2) {
+            res[i] += tab2[i];
+        }
+    }
+    affichePoly(res);
 }
+
+void multiplicationPoly(int *tab1, int*tab2, int l1, int l2){
+    *res = NULL;
+    int max = max(l1,l2);
+    for(int i = 0; i<max; i++) {
+        if (i < l1 && i < l2) {
+            res[i] = tab[i] * tab2[i];
+            continue;
+        }
+        if (i < l1) {
+            res[i] = tab[i];
+            continue;
+        }
+        res[i] = tab2[i];
+    }
+    affichePoly(res);
+}
+
+void eval(int *tab1, int len,int n){
+    int res = 0;
+    for(int i = 0; i<len; i++){
+        res[i] = tab[i]*n;
+    }
+}
+
+
+
+
 int main(){
     com_alea(NBC);
 
