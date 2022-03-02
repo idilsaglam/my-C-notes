@@ -223,7 +223,6 @@ void affiche(char c[]){
     }
 }
 void affichePoly(int* tab, int array_length){
-    printf("%d\n", sizeof(tab));
     for(int i = 0; i< array_length; i++){
         if(tab[i] == 0){
             continue;
@@ -238,8 +237,9 @@ void affichePoly(int* tab, int array_length){
 }
 
 void additionPoly(int* tab1, int l1, int* tab2, int l2){
-    *res = NULL;
+
     int max = max(l1,l2);
+    int* res = calloc(max,sizeof(int));
     for(int i = 0; i < max; i++){
         res[i] = 0;
         if (i < l1) {
@@ -249,31 +249,32 @@ void additionPoly(int* tab1, int l1, int* tab2, int l2){
             res[i] += tab2[i];
         }
     }
-    affichePoly(res);
+    affichePoly(res,max);
 }
 
 void multiplicationPoly(int *tab1, int*tab2, int l1, int l2){
-    *res = NULL;
-    int max = max(l1,l2);
-    for(int i = 0; i<max; i++) {
-        if (i < l1 && i < l2) {
-            res[i] = tab[i] * tab2[i];
-            continue;
-        }
-        if (i < l1) {
-            res[i] = tab[i];
-            continue;
-        }
-        res[i] = tab2[i];
+    int len = l1+l2-1;
+    int* res = calloc(len,sizeof(int));
+
+    for (int i = 0; i<len; i++) {
+        res[i] = 0;
     }
+
+    for (int i = 0; i<l1; i++) {
+        for (int j = 0; j < l2; j++) {
+            res[i+j] += tab1[i] * tab2[j];
+        }
+    }
+    free(res);
     affichePoly(res);
 }
 
 void eval(int *tab1, int len,int n){
     int res = 0;
     for(int i = 0; i<len; i++){
-        res[i] = tab[i]*n;
+        res += tab[i] * n ^ i;
     }
+    return res;
 }
 
 
