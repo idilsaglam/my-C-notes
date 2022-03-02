@@ -84,7 +84,6 @@ void print_tab2 (int *pstart, int *pend){
     return;
 }
 
-//TODO
 void triABulles(int t[], int start, int end){
     int c, sorted;
     int taille = end - start;
@@ -118,7 +117,6 @@ int main(){
 
     int t[] = {2,3,4,5};
 
-    //TODO
     swap(t,t+3);
     print_tab(t,0,4);
     int min;

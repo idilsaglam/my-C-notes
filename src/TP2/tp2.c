@@ -168,7 +168,6 @@ fraction mul(fraction f, fraction g){
     res.num = f.num * g.num;
     return res;
 }
-//TODO
 long pgcd(long a, long b){
     int x = a;
     int y = b;
@@ -298,6 +297,9 @@ int main(){
     additionPoly(t2,3,t3,2);
     multiplicationPoly(t2,t3,3,2);
 
+    //eval({1,0,3},2);
+    int t4[] = {1,0,3};
+    eval(t4,3,2);
     return  0;
 }
 
