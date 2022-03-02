@@ -4,7 +4,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-//TODO! calisiyor anlamaya calis
+
 void swap(int *p, int *q){
     int tmp = *p;
     *p = *q;
@@ -20,7 +20,7 @@ int occ (int nbr, int t[], int v){
     return -1;
 }
 
-//TODO: dogru mu yaptim anlamadim
+
 int *occ_ptr (int nbr, int t[], int v){
     int *p = t;
     for(int i = 0; i<nbr; i++){
