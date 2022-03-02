@@ -180,14 +180,12 @@ long pgcd(long a, long b){
     }
     return x;
 }
-//TODO ISARETTTTTTTTTTTT
 fraction* reduce(fraction* f){
     long cal = pgcd(f->den,f->num);
     f->den /= cal;
     f->num /= cal;
     return f;
 }
-//TODO ISARETTTTTTTTTTTT
 fraction sqrt_frac(fraction f){
     f.num= sqrt(f.num);
     f.den = sqrt(f.den);
@@ -238,9 +236,13 @@ void affichePoly(int* tab, int array_length){
 
 void additionPoly(int* tab1, int l1, int* tab2, int l2){
 
-    int max = max(l1,l2);
-    int* res = calloc(max,sizeof(int));
-    for(int i = 0; i < max; i++){
+    int m = l1;
+    if(l1 < l2){
+        m = l2;
+    }
+
+    int* res = calloc(m,sizeof(int));
+    for(int i = 0; i < m; i++){
         res[i] = 0;
         if (i < l1) {
             res[i] += tab1[i];
@@ -249,7 +251,7 @@ void additionPoly(int* tab1, int l1, int* tab2, int l2){
             res[i] += tab2[i];
         }
     }
-    affichePoly(res,max);
+    affichePoly(res,m);
 }
 
 void multiplicationPoly(int *tab1, int*tab2, int l1, int l2){
@@ -265,16 +267,16 @@ void multiplicationPoly(int *tab1, int*tab2, int l1, int l2){
             res[i+j] += tab1[i] * tab2[j];
         }
     }
+    affichePoly(res,len);
     free(res);
-    affichePoly(res);
 }
 
 void eval(int *tab1, int len,int n){
     int res = 0;
     for(int i = 0; i<len; i++){
-        res += tab[i] * n ^ i;
+        res += tab1[i] * n ^ i;
     }
-    return res;
+    affichePoly(res,len);
 }
 
 
@@ -285,7 +287,16 @@ int main(){
 
     int t[] = {1,0,3,0};
 
-    affichePoly(t, sizeof(t) / sizeof(int));
+    int t2[] = {1,1,2};
+
+    int t3[] = {2,3};
+
+
+    affichePoly(t2, 3);
+    affichePoly(t3,2);
+
+    additionPoly(t2,3,t3,2);
+    multiplicationPoly(t2,t3,3,2);
 
     return  0;
 }
